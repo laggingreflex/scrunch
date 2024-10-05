@@ -66,14 +66,24 @@ function App() {
           onChange={(e) => setMaxDifferentPixels(Number(e.target.value))}
         ></input>
       </form>
-      {outputImageBlob && (
+      {outputImageBlob ? (
         <div className='output' >
           <h3>Processed Image:</h3>
           <img src={outputImageBlob} alt="Processed output"
             onClick={() => triggerDownload(outputImageBlob, 'processed-image.png')}
           />
         </div>
-      )}
+      ) :
+        <div className='demo'>
+          <h3>Demo:</h3>
+          <video
+            src='https://github.com/user-attachments/assets/24c9f030-e108-4440-8209-de764370c09f'
+            autoPlay
+            muted
+            loop
+          ></video>
+        </div>
+      }
     </div>
   );
 
