@@ -1,0 +1,1 @@
+Removes rows of mostly uniform color from images, effectively scrunching images with text or screenshots to reduce vertical space. Ideal for sharing on mobile, where conserving screen real estate is crucial, it visually compresses images while maintaining key information.
