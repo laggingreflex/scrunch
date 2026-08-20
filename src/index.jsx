@@ -17,12 +17,14 @@ function App() {
   const [inputImageBuffer, setInputImageBuffer] = useState(null);
   const [outputImageBlob, setOutputImageBlob] = useState(null);
   const [maxDifferentPixels, setMaxDifferentPixels] = useState(5);
+  const [error, setError] = useState('');
 
 
   useEffect(() => {
     if (!inputImageBuffer) return;
     clearTimeout(timeout);
     timeout = setTimeout(() => {
+      setError(null);
       processImage(inputImageBuffer, maxDifferentPixels)
         .then((blob) => {
           setOutputImageBlob(
@@ -31,6 +33,7 @@ function App() {
         })
         .catch((error) => {
           console.error('Error processing image:', error);
+          setError(['Error processing image', error?.message ?? String(error)].join(': '));
         });
     }, 333);
   }, [inputImageBuffer, maxDifferentPixels]);
@@ -66,6 +69,7 @@ function App() {
           onChange={(e) => setMaxDifferentPixels(Number(e.target.value))}
         ></input>
       </form>
+      {error ? <pre>{error}</pre> : null}
       {outputImageBlob ? (
         <div className='output' >
           <h3>Processed Image:</h3>
